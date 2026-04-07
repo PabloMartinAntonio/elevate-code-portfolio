@@ -1,8 +1,9 @@
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
-import { getSettings } from "@/lib/data";
+import { getSettings, getBranding } from "@/lib/data";
 
 const Footer = () => {
   const settings = getSettings();
+  const branding = getBranding();
 
   const socials = [
     { icon: Linkedin, url: settings.linkedinUrl, label: "LinkedIn" },
@@ -16,7 +17,7 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <p className="text-foreground font-semibold text-lg">DevFreelance</p>
+            <p className="text-foreground font-semibold text-lg">{branding.siteName}</p>
             <p className="text-muted-foreground text-sm mt-1">{settings.email}</p>
           </div>
 
@@ -38,7 +39,7 @@ const Footer = () => {
 
         <div className="text-center mt-8 pt-8 border-t border-border">
           <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} DevFreelance. Todos los derechos reservados.
+            © {new Date().getFullYear()} {branding.siteName}. {branding.footerTagline}
           </p>
         </div>
       </div>
