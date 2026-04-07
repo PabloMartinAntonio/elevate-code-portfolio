@@ -30,9 +30,16 @@ const ProjectCard = ({ project, index }: Props) => {
         <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">
           {project.title}
         </h3>
-        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+        <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
           {project.shortDescription}
         </p>
+
+        <div className="mb-4 p-3 rounded-lg bg-muted/40 border border-border/50">
+          <p className="text-xs font-medium text-destructive/80 mb-1">Problema</p>
+          <p className="text-muted-foreground text-xs line-clamp-2 mb-2">{project.problem}</p>
+          <p className="text-xs font-medium text-primary/80 mb-1">Solución</p>
+          <p className="text-muted-foreground text-xs line-clamp-2">{project.solution}</p>
+        </div>
 
         <div className="flex flex-wrap gap-2 mb-5">
           {project.technologies.map((tech) => (
