@@ -10,6 +10,24 @@ export interface Project {
   technologies: string[];
 }
 
+export interface Service {
+  id: string;
+  icon: string; // lucide icon name
+  title: string;
+  subtitle: string;
+  description: string;
+}
+
+export interface HeroContent {
+  badge: string;
+  titleLine1: string;
+  titleHighlight: string;
+  titleLine2: string;
+  description: string;
+  ctaPrimaryText: string;
+  ctaSecondaryText: string;
+}
+
 export interface SiteSettings {
   whatsappNumber: string;
   email: string;
@@ -17,6 +35,51 @@ export interface SiteSettings {
   githubUrl: string;
   twitterUrl: string;
 }
+
+export interface SiteBranding {
+  siteName: string;
+  footerTagline: string;
+}
+
+// ── Defaults ──
+
+const DEFAULT_HERO: HeroContent = {
+  badge: "Desarrollador de Software Freelance",
+  titleLine1: "Creo ",
+  titleHighlight: "soluciones técnicas",
+  titleLine2: "a la medida de tu negocio",
+  description:
+    "Transformo ideas en sistemas robustos, automatizaciones inteligentes e infraestructura que impulsa tu crecimiento.",
+  ctaPrimaryText: "Hablemos por WhatsApp",
+  ctaSecondaryText: "Ver Proyectos",
+};
+
+const DEFAULT_SERVICES: Service[] = [
+  {
+    id: "dev-sistemas",
+    icon: "Monitor",
+    title: "Desarrollo de Sistemas",
+    subtitle: "ERP / CRM a medida",
+    description:
+      "Diseño y construyo sistemas de gestión empresarial adaptados a tu flujo de trabajo. Desde control de inventario hasta facturación electrónica.",
+  },
+  {
+    id: "automatizacion",
+    icon: "Workflow",
+    title: "Automatización de Procesos",
+    subtitle: "N8N / Bots / Integraciones",
+    description:
+      "Automatizo tareas repetitivas conectando tus herramientas favoritas. Chatbots, flujos de trabajo y notificaciones inteligentes.",
+  },
+  {
+    id: "infra",
+    icon: "Server",
+    title: "Infraestructura Tecnológica",
+    subtitle: "Cloud / DevOps / Seguridad",
+    description:
+      "Configuro servidores, bases de datos y pipelines CI/CD para que tu aplicación sea rápida, segura y escalable.",
+  },
+];
 
 const DEFAULT_PROJECTS: Project[] = [
   {
@@ -68,20 +131,33 @@ const DEFAULT_SETTINGS: SiteSettings = {
   twitterUrl: "https://twitter.com",
 };
 
-export function getProjects(): Project[] {
-  const stored = localStorage.getItem("portfolio_projects");
-  return stored ? JSON.parse(stored) : DEFAULT_PROJECTS;
+const DEFAULT_BRANDING: SiteBranding = {
+  siteName: "DevFreelance",
+  footerTagline: "Todos los derechos reservados.",
+};
+
+// ── Getters & Setters ──
+
+function get<T>(key: string, fallback: T): T {
+  const stored = localStorage.getItem(key);
+  return stored ? JSON.parse(stored) : fallback;
 }
 
-export function saveProjects(projects: Project[]) {
-  localStorage.setItem("portfolio_projects", JSON.stringify(projects));
+function save<T>(key: string, value: T) {
+  localStorage.setItem(key, JSON.stringify(value));
 }
 
-export function getSettings(): SiteSettings {
-  const stored = localStorage.getItem("portfolio_settings");
-  return stored ? JSON.parse(stored) : DEFAULT_SETTINGS;
-}
+export const getProjects = () => get<Project[]>("portfolio_projects", DEFAULT_PROJECTS);
+export const saveProjects = (v: Project[]) => save("portfolio_projects", v);
 
-export function saveSettings(settings: SiteSettings) {
-  localStorage.setItem("portfolio_settings", JSON.stringify(settings));
-}
+export const getSettings = () => get<SiteSettings>("portfolio_settings", DEFAULT_SETTINGS);
+export const saveSettings = (v: SiteSettings) => save("portfolio_settings", v);
+
+export const getHero = () => get<HeroContent>("portfolio_hero", DEFAULT_HERO);
+export const saveHero = (v: HeroContent) => save("portfolio_hero", v);
+
+export const getServices = () => get<Service[]>("portfolio_services", DEFAULT_SERVICES);
+export const saveServices = (v: Service[]) => save("portfolio_services", v);
+
+export const getBranding = () => get<SiteBranding>("portfolio_branding", DEFAULT_BRANDING);
+export const saveBranding = (v: SiteBranding) => save("portfolio_branding", v);
