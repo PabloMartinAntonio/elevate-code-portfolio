@@ -1,6 +1,7 @@
 import { ArrowDown, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getSettings, getHero } from "@/lib/data";
+import heroBgVideo from "@/assets/hero-bg-video.mp4.asset.json";
 
 const HeroSection = () => {
   const settings = getSettings();
@@ -12,7 +13,15 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--border))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border))_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-30"
+        src={heroBgVideo.url}
+      />
+      <div className="absolute inset-0 bg-background/60" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]" />
 
       <div className="relative z-10 container mx-auto px-6 text-center max-w-4xl">
