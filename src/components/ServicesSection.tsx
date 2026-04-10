@@ -1,6 +1,7 @@
 import { Server, Workflow, Monitor, Code, Globe, Database, Shield, Cpu, Zap } from "lucide-react";
 import { getServices } from "@/lib/data";
 import type { LucideIcon } from "lucide-react";
+import servicesBg from "@/assets/services-bg.jpg";
 
 const iconMap: Record<string, LucideIcon> = {
   Monitor, Workflow, Server, Code, Globe, Database, Shield, Cpu, Zap,
@@ -10,8 +11,16 @@ const ServicesSection = () => {
   const services = getServices();
 
   return (
-    <section className="py-24 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.03] to-transparent" />
+    <section className="py-24 relative overflow-hidden">
+      <img
+        src={servicesBg}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
+        loading="lazy"
+        width={1920}
+        height={1080}
+      />
+      <div className="absolute inset-0 bg-background/70" />
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 animate-fade-up">
           <span className="text-primary text-sm font-semibold tracking-widest uppercase">
