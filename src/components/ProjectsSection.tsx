@@ -1,12 +1,22 @@
 import { getProjects } from "@/lib/data";
 import ProjectCard from "./ProjectCard";
+import projectsBg from "@/assets/projects-bg.jpg";
 
 const ProjectsSection = () => {
   const projects = getProjects();
 
   return (
-    <section id="proyectos" className="py-24 relative">
-      <div className="container mx-auto px-6">
+    <section id="proyectos" className="py-24 relative overflow-hidden">
+      <img
+        src={projectsBg}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
+        loading="lazy"
+        width={1920}
+        height={1080}
+      />
+      <div className="absolute inset-0 bg-background/70" />
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 animate-fade-up">
           <span className="text-primary text-sm font-semibold tracking-widest uppercase">
             Portfolio
